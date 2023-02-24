@@ -5,10 +5,12 @@ from glob import glob
 import torch
 from tqdm import tqdm
 
-def get_coordinate(depth, viewing_dir=False):
+def get_coordinate(viewing_dir=False):
     # h * w 
-    h, w = depth.shape[:2]
-    u = (np.tile(np.arange(w),[h,1]) - w * 0.5)/ (0.5 * w)
+    # h, w = [depth.shape[:2]]
+    h, w = [1024,1224]
+    # u,v -1 to 1, left up (-1,-1), right down (0.999,0.999)
+    u = (np.tile(np.arange(w),[h,1]) - w * 0.5)/ (0.5 * w) 
     v = (np.tile(np.arange(h)[...,None],[1,w]) - 0.5 * h) / (0.5 * h)
     coordinate = np.concatenate([u[...,None],v[...,None], 1. * np.ones([h,w,1])],axis=2)
     if viewing_dir:

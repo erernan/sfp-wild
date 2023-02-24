@@ -363,7 +363,7 @@ def main_worker(gpu, ngpus_per_node, args):
     # Optimizer
 
     args.gpu = gpu
-    print(args.gpu)
+    print(f"gpu: {args.gpu}")
 
     today = date.today()
 
