@@ -111,7 +111,7 @@ class SfPTestDataset(Dataset):
 
         # TODO
         # self.image_coordinate = dataloader_util.get_coordinate(np.load(self.pol_paths[0]), viewing_dir=self.with_viewing_dir)
-        self.image_coordinate = dataloader_util.get_coordinate(viewing_dir=self.with_viewing_dir)
+        self.image_coordinate = dataloader_util.get_coordinate(np.load(self.pol_paths[0]),viewing_dir=self.with_viewing_dir)
         self.viewing_direction = dataloader_util.get_vd()
         self.crop_interval=crop_interval
 

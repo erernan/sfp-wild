@@ -57,7 +57,7 @@ parser.add_argument("--norm", type=str, default='bn',
 
 # Dataset parameters
 parser.add_argument('--dataset', default='spwinter', type=str, 
-                    choices= ["spwinter", "deepsfp"], 
+                    choices= ["spwinter", "deepsfp", "my"], 
                     help='path to dataset iccv2021') 
 
 # Data Preprocessing parameters
@@ -77,7 +77,7 @@ parser.add_argument('--netinput', default='fiveraw_pol_posen', type=str,
                 choices= [  
                             "fourraw_pol_vd",
                             "onlyiun_pol_vd",
-                            "fiveraw_pol_vd",
+                            "fiveraw_pol_vd"
                             ], 
                 help='feature feed into the netowrk') 
 
@@ -351,6 +351,10 @@ def test(model, args):
         print("Testset: sfpwild_test_inter")
 #        test_one_set(model, args, test_txt = "{}/sfpwild_test_inter_combined.txt".format(args.dataroot))
         test_one_set(model, args, test_txt = "data_path_txt/sfpwild_test_inter_root.txt".format(args.dataroot))
+        
+    if "my" in args.dataset:
+        print("Testset: my")
+        test_one_set(model, args, test_txt = "data_path_txt/my_test_root.txt".format(args.dataroot))
 
 
     exit()
@@ -462,7 +466,7 @@ def main_worker(gpu, ngpus_per_node, args):
         # raise NotImplementedError("Only DistributedDataParallel is supported.")
     
 
-    start_epoch = resume_training(args, model)
+    start_epoch = resume_training(args, model, resumef= "/nas/wq/sfp-wild/results/test_debug/ckpt_epochs/ckpt.pth")
     cudnn.benchmark = True
 
 

@@ -78,7 +78,8 @@ def	resume_training(args, model, resumef=None):
         checkpoint = torch.load(resumef, map_location=loc)
         state_dict = OrderedDict()
         for k, v in checkpoint['state_dict'].items():
-            name = "module." + k
+            # name = "module." + k
+            name =  k
             state_dict[name] = v
 
 

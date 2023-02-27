@@ -1,0 +1,4 @@
+DATAROOT/my_test/R/r.npy
+DATAROOT/my_test/B/b.npy
+DATAROOT/my_test/G/g.npy
+DATAROOT/my_test/ave/ave.npy

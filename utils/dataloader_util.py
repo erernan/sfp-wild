@@ -5,10 +5,10 @@ from glob import glob
 import torch
 from tqdm import tqdm
 
-def get_coordinate(viewing_dir=False):
+def get_coordinate(depth,viewing_dir=False):
     # h * w 
-    # h, w = [depth.shape[:2]]
-    h, w = [1024,1224]
+    h, w = depth.shape[:2]
+    # h, w = [1024,1224]
     # u,v -1 to 1, left up (-1,-1), right down (0.999,0.999)
     u = (np.tile(np.arange(w),[h,1]) - w * 0.5)/ (0.5 * w) 
     v = (np.tile(np.arange(h)[...,None],[1,w]) - 0.5 * h) / (0.5 * h)
@@ -18,7 +18,12 @@ def get_coordinate(viewing_dir=False):
     return coordinate[None,...]
 
 def get_vd(path="./utils/vd_local.npy"):
-    return np.load(path)[None, ...]
+    x = np.zeros(shape=[1024,1224])
+    y = np.zeros(shape=[1024,1224])
+    z = np.ones(shape=[1024,1224])
+    vd = np.expand_dims(np.stack([x,y,z],axis=2),axis = 0)
+    return vd
+    # return np.load(path)[None, ...]
     
     # interpolated_normal, use_sfpwild, use_deepsfp
 
